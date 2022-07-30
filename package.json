@@ -13,15 +13,15 @@
   },
   "scripts": {
     "start": "tsdx watch --entry src/ts/index.ts",
-    "build": "tsdx build --entry src/ts/index.ts",
+    "build": "tsdx build --entry src/ts/index.ts && mv dist/ts/* dist && rm -rf dist/ts",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "dev": "nodemon",
-    "compile": "./compile.sh",
-    "postinstall": "./compile.sh"
+    "compile": "rm -fr bin && mkdir -p bin && ./compile.sh",
+    "postinstall": "rm -fr bin && mkdir -p bin && ./compile.sh"
   },
   "peerDependencies": {},
   "husky": {
