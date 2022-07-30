@@ -16,7 +16,7 @@
     "build": "tsdx build --entry src/ts/index.ts && mv dist/ts/* dist && rm -rf dist/ts",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepare": "tsdx build --entry src/ts/index.ts && mv dist/ts/* dist && rm -rf dist/ts",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "dev": "nodemon",
