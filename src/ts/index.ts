@@ -10,6 +10,10 @@ export default class SIListener extends EventEmitter {
     this.debugMode = debugMode;
   }
 
+  getDebugMode(): DebugMode {
+    return this.debugMode;
+  }
+
 }
 
 export enum DebugMode {

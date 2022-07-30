@@ -11,14 +11,16 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
+    "start": "tsdx watch --entry src/ts/index.ts",
+    "build": "tsdx build --entry src/ts/index.ts",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "compile": "./compile.sh",
+    "postinstall": "./compile.sh"
   },
   "peerDependencies": {},
   "husky": {
