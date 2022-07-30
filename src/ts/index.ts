@@ -1,6 +1,8 @@
 import EventEmitter from "events";
 import { join } from "path";
+import { EventName, KeyboardEvent, parseEvent } from "./events";
 import StdoutReader from "./readStdout";
+export { KeyboardEvent };
 
 export default class SIListener extends EventEmitter {
 
@@ -11,22 +13,34 @@ export default class SIListener extends EventEmitter {
     super();
 
     this.debugMode = debugMode;
-    this.stdoutReader = new StdoutReader([join(__dirname, "../bin/listener")], this.stdoutHandler.bind(this));
+    this.stdoutReader = new StdoutReader([join(__dirname, "../bin/listener")], this.handleStdout.bind(this));
+  
+    this.startDebugging();
+  }
+
+  startDebugging() {
+    this.on(EventName.KeyUp, (event: KeyboardEvent) => 
+      this.log(`Key Up: ${event.keyCode}`, DebugMode.Keyboard));
+    
+    this.on(EventName.KeyDown, (event: KeyboardEvent) =>
+      this.log(`Key Down: ${event.keyCode}`, DebugMode.Keyboard));
   }
 
   getDebugMode(): DebugMode {
     return this.debugMode;
   }
 
-  stdoutHandler(line: string) {
-    this.log("Received keypress: " + line.substring(0, line.length - 1), DebugMode.Keyboard);
+  handleStdout(str: string) {
+    const event = parseEvent(str);
+    
+    this.emit(event.name, event);
   }
 
   log(message: string, debugMode: DebugMode = DebugMode.None) { 
     if (debugMode !== DebugMode.None && this.debugMode !== DebugMode.All && debugMode !== this.debugMode)
       return;
     
-    console.log(debugMode, message);
+    console.log("[System Input]",debugMode, message);
   }
 
   start() {
