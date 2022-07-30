@@ -5,7 +5,7 @@
 if [ "$(uname)" == "Darwin" ]; then
   cd ./src/c/mac;
   make;
-  mv globalkeypress ../../../bin/globalkeypress;
+  mv listener ../../../bin/listener;
   make clean;
   cd ../../..;
 
@@ -13,7 +13,7 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   cd ./src/c/linux;
   make;
-  mv globalkeypress ../../../bin/globalkeypress;
+  mv listener ../../../bin/listener;
   make clean;
   cd ../../..;
 

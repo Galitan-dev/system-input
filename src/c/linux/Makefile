@@ -1,7 +1,7 @@
 CC := gcc
 CFLAGS := -g -Wall
-BIN_NAME := globalkeypress
-OBJS := globalkeypress.o key_util.o 
+BIN_NAME := listener
+OBJS := index.o key_util.o 
 
 all: $(BIN_NAME)
 
