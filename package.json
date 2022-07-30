@@ -12,16 +12,18 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch --entry src/ts/index.ts",
-    "build": "tsdx build --entry src/ts/index.ts && mv dist/ts/* dist && rm -rf dist/ts && cp src/js/index.js dist/index.js",
+    "start": "tsdx watch --entry src/ts/index.ts --onSuccess \"yarn -s postbuild\"",
+    "build": "tsdx build --entry src/ts/index.ts && yarn -s postbuild",
+    "postbuild": "mv dist/ts/* dist && rm -rf dist/ts && cp src/js/index.js dist/index.js",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build --entry src/ts/index.ts && mv dist/ts/* dist && rm -rf dist/ts && cp src/js/index.js dist/index.js",
+    "prepare": "tsdx build --entry src/ts/index.ts && yarn -s postbuild",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "dev": "nodemon",
+    "dev": "nodemon --exec ts-node --skipProject",
+    "dev:hello-world": "yarn dev examples/helloWorld.ts",
     "compile": "rm -fr bin && mkdir -p bin && ./compile.sh",
-    "postinstall": "rm -fr bin && mkdir -p bin && ./compile.sh"
+    "postinstall": "yarn -s compile"
   },
   "peerDependencies": {},
   "husky": {
