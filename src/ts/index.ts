@@ -1,6 +1,6 @@
 import EventEmitter from "events";
 
-export default class SIListener extends EventEmitter {
+class SIListener extends EventEmitter {
 
   private debugMode: DebugMode;
 
@@ -15,6 +15,9 @@ export default class SIListener extends EventEmitter {
   }
 
 }
+
+exports = SIListener
+export default SIListener;
 
 export enum DebugMode {
   None = "none",
