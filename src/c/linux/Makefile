@@ -1,7 +1,7 @@
 CC := gcc
 CFLAGS := -g -Wall
 BIN_NAME := listener
-OBJS := index.o key_util.o 
+OBJS := index.o
 
 all: $(BIN_NAME)
 
