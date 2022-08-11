@@ -91,9 +91,9 @@ int main(int argc, char **argv)
    {
       if (event.type == EV_KEY)
       {
-         if (event.value == = KEY_PRESS)
+         if (event.value == KEY_PRESS)
             eventType = 10;
-         else if (event.value == = KEY_RELEASE)
+         else if (event.value == KEY_RELEASE)
             eventType = 11;
          else
             continue;
