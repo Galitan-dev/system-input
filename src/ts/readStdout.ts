@@ -16,11 +16,8 @@ export default class StdoutReader {
             throw new Error("StdoutReader already started");
 
         const cp = spawn(this.command, [], {
-            stdio: "inherit"
+            stdio: "pipe",
         });
-
-        if (!cp.stdout || !cp.stderr)
-            throw new Error("Unable to read stdout or stderr of " + this.command);
 
         cp.stdout.on("data", (data: Buffer) => {
             this.handler(data.toString("utf8"));
