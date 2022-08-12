@@ -15,15 +15,13 @@ export default class StdoutReader {
         if (this.cp)
             throw new Error("StdoutReader already started");
 
-        const cp = spawn(this.command, [], {
-            stdio: "pipe",
-        });
+        const cp = spawn(this.command);
 
         cp.stdout.on("data", (data: Buffer) => {
             this.handler(data.toString("utf8"));
         });
         
-        cp.stdout.on("error", (data: Buffer) => {
+        cp.stderr.on("data", (data: Buffer) => {
             throw new Error(data.toString("utf8"));
         });
         
