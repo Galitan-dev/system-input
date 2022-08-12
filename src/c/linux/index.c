@@ -39,7 +39,7 @@ static int openKeyboardDeviceFile(char *deviceFile)
    int kbd_fd = open(deviceFile, O_RDONLY);
    if (kbd_fd == -1)
    {
-      LOG_ERROR("%s", strerror(errno));
+      printf("%s\n", strerror(errno));
       exit(-1);
    }
 
@@ -57,7 +57,8 @@ static char *getKeyboardDeviceFileName()
    FILE *pipe = popen(command, "r");
    if (pipe == NULL)
    {
-      LOG_ERROR("Could not determine keyboard device file");
+      printf("Could not determine keyboard device file\n");
+      fflush(stdout);
    }
 
    char result[20] = "/dev/input/";
