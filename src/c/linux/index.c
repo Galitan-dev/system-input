@@ -8,8 +8,6 @@
 #include <unistd.h> // daemon, close
 #include <linux/input.h>
 
-#include "util.h"
-
 #define KEY_RELEASE 0
 #define KEY_PRESS 1
 
@@ -78,9 +76,7 @@ int main(int argc, char **argv)
    int kbd_fd = openKeyboardDeviceFile(deviceFile);
    assert(kbd_fd > 0);
 
-   uint8_t shift_pressed = 0;
    input_event event;
-
    enum suit
    {
       keydown = 10,
@@ -100,9 +96,9 @@ int main(int argc, char **argv)
 
          int keyCode = event.code;
 
-         LOG("%u %d\n", eventType, keyCode);
+         printf("%u %d\n", eventType, keyCode);
+         fflush(stdout);
       }
-      assert(shift_pressed >= 0 && shift_pressed <= 2);
    }
 
    close(kbd_fd);
