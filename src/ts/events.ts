@@ -17,6 +17,8 @@ export function parseEvent(str: string): Event | KeyboardEvent {
 }
 
 export enum EventType {
+    Ready = 0,
+    Close = 1,
     KeyDown = 10,
     KeyUp = 11,
 }
@@ -26,11 +28,15 @@ export declare type EventNames = {
 };
 
 export enum EventName {
+    Ready = 'ready',
+    Close = 'close',
     KeyDown = "keydown",
     KeyUp = "keyup",
 }
 
 export const eventNames: EventNames = {
+    [EventType.Ready]: EventName.Ready,
+    [EventType.Close]: EventName.Close,
     [EventType.KeyDown]: EventName.KeyDown,
     [EventType.KeyUp]: EventName.KeyUp,
 }

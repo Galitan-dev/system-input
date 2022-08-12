@@ -12,6 +12,13 @@
 #define KEY_PRESS 1
 
 typedef struct input_event input_event;
+enum suit
+{
+   ready = 0,
+   closeEv = 1,
+   keydown = 10,
+   keyup = 11,
+} eventType;
 
 static void rootCheck();
 static int openKeyboardDeviceFile(char *deviceFile);
@@ -78,11 +85,9 @@ int main(int argc, char **argv)
    assert(kbd_fd > 0);
 
    input_event event;
-   enum suit
-   {
-      keydown = 10,
-      keyup = 11,
-   } eventType;
+
+   printf("%u\n", ready);
+   fflush(stdout);
 
    while (read(kbd_fd, &event, sizeof(input_event)) > 0)
    {

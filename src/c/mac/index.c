@@ -6,6 +6,13 @@
 #include <Carbon/Carbon.h>
 
 bool metaKeyPressed[10] = {0};
+enum suit
+{
+  ready = 0,
+  closeEv = 1,
+  keydown = 10,
+  keyup = 11,
+} eventType;
 
 // The following callback method is invoked on every keypress.
 CGEventRef CGEventCallback(
@@ -20,12 +27,6 @@ CGEventRef CGEventCallback(
   {
     return event;
   }
-
-  enum suit
-  {
-    keydown = 10,
-    keyup = 11,
-  } eventType;
 
   // Retrieve the incoming keycode.
   CGKeyCode keyCode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
@@ -42,7 +43,6 @@ CGEventRef CGEventCallback(
   }
 
   printf("%u %d\n", eventType, keyCode);
-
   fflush(stdout);
 
   return event;
@@ -68,7 +68,8 @@ int main(void)
   CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopCommonModes);
   CGEventTapEnable(eventTap, true);
 
-  CFRunLoopRun();
+  printf("%u\n", ready);
+  fflush(stdout);
 
-  // return 0;
+  CFRunLoopRun();
 }

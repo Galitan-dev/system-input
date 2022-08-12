@@ -1,4 +1,5 @@
 import { ChildProcess, spawn } from "child_process";
+import { EventType } from "./events";
 
 export default class StdoutReader {
 
@@ -24,6 +25,10 @@ export default class StdoutReader {
         cp.stderr.on("data", (data: Buffer) => {
             throw new Error(data.toString("utf8"));
         });
+
+        cp.on("close", () => {
+            this.handler(EventType.Close + "\n");
+        })
         
         this.cp = cp;
     }
