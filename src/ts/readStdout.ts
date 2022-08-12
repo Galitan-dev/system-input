@@ -33,6 +33,7 @@ export default class StdoutReader {
             throw new Error("StdoutReader already stopped");
      
         this.cp.kill("SIGTERM");
+        delete this.cp;
     }
 
 }
